@@ -1,0 +1,2 @@
+player=cvlc --file-caching 2000
+default-stream=best
