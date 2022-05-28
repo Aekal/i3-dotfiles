@@ -30,7 +30,7 @@ font xft:URWGothic-Book 11
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec $term
+bindsym $mod+Return exec --no-startup-id $term
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -71,8 +71,8 @@ bindsym Print exec --no-startup-id i3-scrot
 bindsym $mod+Print --release exec --no-startup-id i3-scrot -w
 bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
-bindsym $mod+Shift+h exec --no-startup-id vscodium; exec --no-startup-id brave; exec --no-startup-id rocketchat-desktop; exec --no-startup-id gitkraken; exec --no-startup-id mailspring; exec --no-startup-id spotify;
-bindsym $mod+Shift+m exec autorandr --load dual
+bindsym $mod+Shift+h exec --no-startup-id vscodium; exec --no-startup-id brave; exec --no-startup-id cliq; exec --no-startup-id gitkraken; exec --no-startup-id mailspring; exec --no-startup-id spotify;
+bindsym $mod+Shift+m exec --no-startup-id autorandr --load dual
 
 # focus_follows_mouse no
 
@@ -106,8 +106,8 @@ bindsym $mod+b workspace back_and_forth
 bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
 
 # split orientation
-bindsym $mod+h split h;exec notify-send 'tile horizontally'
-bindsym $mod+v split v;exec notify-send 'tile vertically'
+bindsym $mod+h split h;exec --no-startup-id notify-send 'tile horizontally'
+bindsym $mod+v split v;exec --no-startup-id notify-send 'tile vertically'
 bindsym $mod+q split toggle
 
 # toggle fullscreen mode for the focused container
@@ -197,12 +197,13 @@ bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 # Open applications on specific workspaces
 assign [class="VSCodium"] $ws1
 assign [class="Brave"] $ws2
+assign [class="zoom"] $ws2
 assign [class="Rocket.Chat"] $ws3
+assign [class="Cliq"] $ws3
 assign [class="notion-app"] $ws3
 assign [class="GitKraken"] $ws4
 assign [class="Mailspring"] $ws5
 assign [class="discord"] $ws7
-assign [class="Zoom"] $ws2
 for_window [class="Spotify"] move to workspace $ws6
 
 # Open specific applications in floating mode
@@ -234,6 +235,7 @@ for_window [class="Timeset-gui"] floating enable border normal
 for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Xfburn"] floating enable
 for_window [class="ksnip"] floating enable
+for_window [title="zoom "] floating enable
 
 # switch to workspace with urgent window automatically
 for_window [urgent=latest] focus
@@ -304,7 +306,7 @@ exec --no-startup-id twitch-indicator
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
 exec_always --no-startup-id ~/.config/polybar/launch.sh
-exec --no-startup-id nitrogen --restore; sleep 1; picom -b
+exec_always --no-startup-id nitrogen --restore; sleep 1; picom -b
 
 # Color palette used for the terminal ( ~/.Xresources file )
 # Colors are gathered based on the documentation:
