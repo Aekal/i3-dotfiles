@@ -1,0 +1,57 @@
+{
+    "border": "pixel",
+    "current_border_width": 2,
+    "floating": "auto_off",
+    "geometry": {
+        "height": 1404,
+        "width": 1788,
+        "x": 2,
+        "y": 2
+    },
+    "marks": [],
+    "name": "VSCodium",
+    "percent": 0.7,
+    "swallows": [
+        {
+            "class": "^VSCodium$",
+            "instance": "^vscodium$",
+            "machine": "^xps\\-i3$",
+            "window_role": "^browser\\-window$"
+        }
+    ],
+    "type": "con"
+}
+
+{
+    // splitv split container with 1 children
+    "border": "pixel",
+    "floating": "auto_off",
+    "layout": "splitv",
+    "marks": [],
+    "percent": 0.3,
+    "type": "con",
+    "nodes": [
+        {
+            "border": "pixel",
+            "current_border_width": 2,
+            "floating": "auto_off",
+            "geometry": {
+                "height": 600,
+                "width": 800,
+                "x": 0,
+                "y": 0
+            },
+            "marks": [],
+            "name": "Alacritty",
+            "percent": 1,
+            "swallows": [
+                {
+                    "class": "^Alacritty$",
+                    "instance": "^Alacritty$",
+                    "machine": "^xps\\-i3$"
+                }
+            ],
+            "type": "con"
+        }
+    ]
+}

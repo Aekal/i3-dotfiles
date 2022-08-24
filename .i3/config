@@ -69,7 +69,7 @@ bindsym Print exec --no-startup-id ksnip -r
 bindsym $mod+Print --release exec --no-startup-id ksnip -a
 bindsym $mod+Shift+Print --release exec --no-startup-id ksnip -m
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
-bindsym $mod+Shift+h exec --no-startup-id vscodium; exec --no-startup-id brave; exec --no-startup-id notion-app; exec --no-startup-id gitkraken; exec --no-startup-id mailspring; exec --no-startup-id spotify;
+bindsym $mod+Shift+h exec --no-startup-id vscodium; exec --no-startup-id alacritty; exec --no-startup-id brave; exec --no-startup-id notion-app; exec --no-startup-id gitkraken; exec --no-startup-id mailspring; exec --no-startup-id spotify;
 bindsym $mod+Shift+m exec --no-startup-id autorandr --load dual
 
 # focus_follows_mouse no
