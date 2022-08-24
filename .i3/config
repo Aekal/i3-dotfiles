@@ -11,7 +11,7 @@ set $term alacritty
 # workspace_layout tabbed <stacking|tabbed>
 
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
-default_border pixel 3
+default_border pixel 2
 default_floating_border normal
 
 # Hide borders
@@ -19,7 +19,7 @@ hide_edge_borders none
 
 # change borders
 bindsym $mod+u border none
-bindsym $mod+y border pixel 1
+bindsym $mod+y border pixel 2
 bindsym $mod+n border normal
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -58,23 +58,22 @@ bindsym $mod+Ctrl+m exec pavucontrol
 # bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
 
 # Start Applications
-bindsym $mod+Ctrl+b exec $term -e 'bmenu'
-bindsym $mod+F2 exec brave
-bindsym $mod+F3 exec pcmanfm
-# bindsym $mod+F3 exec ranger
-bindsym $mod+Shift+F3 exec pcmanfm_pkexec
-bindsym $mod+F5 exec $term -e 'mocp'
-bindsym $mod+t exec --no-startup-id pkill picom
-bindsym $mod+Ctrl+t exec --no-startup-id picom -b
+bindsym $mod+Prior exec --no-startup-id vscodium
+bindsym $mod+Next exec --no-startup-id brave
+bindsym $mod+Home exec --no-startup-id pcmanfm
+bindsym $mod+End exec --no-startup-id alacritty -e ranger
+# bindsym $mod+t exec --no-startup-id pkill picom
+# bindsym $mod+Ctrl+t exec --no-startup-id picom -b
 bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
-bindsym Print exec --no-startup-id i3-scrot
-bindsym $mod+Print --release exec --no-startup-id i3-scrot -w
-bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
+bindsym Print exec --no-startup-id ksnip -r
+bindsym $mod+Print --release exec --no-startup-id ksnip -a
+bindsym $mod+Shift+Print --release exec --no-startup-id ksnip -m
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
-bindsym $mod+Shift+h exec --no-startup-id vscodium; exec --no-startup-id brave; exec --no-startup-id cliq; exec --no-startup-id gitkraken; exec --no-startup-id mailspring; exec --no-startup-id spotify;
+bindsym $mod+Shift+h exec --no-startup-id vscodium; exec --no-startup-id brave; exec --no-startup-id notion-app; exec --no-startup-id gitkraken; exec --no-startup-id mailspring; exec --no-startup-id spotify;
 bindsym $mod+Shift+m exec --no-startup-id autorandr --load dual
 
 # focus_follows_mouse no
+focus_on_window_activation focus
 
 # change focus
 bindsym $mod+j focus left
@@ -108,15 +107,15 @@ bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_
 # split orientation
 bindsym $mod+h split h;exec --no-startup-id notify-send 'tile horizontally'
 bindsym $mod+v split v;exec --no-startup-id notify-send 'tile vertically'
-bindsym $mod+q split toggle
+# bindsym $mod+q split toggle
 
 # toggle fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+# bindsym $mod+s layout stacking
+# bindsym $mod+w layout tabbed
+# bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -140,6 +139,12 @@ bindsym $mod+minus scratchpad show
 #navigate workspaces next / previous
 bindsym $mod+Ctrl+Right workspace next
 bindsym $mod+Ctrl+Left workspace prev
+
+#multimedia keys
+bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
+bindsym XF86AudioPause exec --no-startup-id playerctl play-pause
+bindsym XF86AudioNext exec --no-startup-id playerctl next
+bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 
 # Workspace names
 # to display names or symbols instead of plain workspace numbers you can use
@@ -165,14 +170,18 @@ bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
 
 # assign workspace to monitor
-workspace $ws1 output DP-1
-workspace $ws2 output DP-2
-workspace $ws3 output DP-1
-workspace $ws4 output DP-2
-workspace $ws5 output DP-1
-workspace $ws6 output DP-2
-workspace $ws7 output DP-1
-workspace $ws8 output DP-2
+workspace $ws1 output DP1
+workspace $ws2 output DP2
+workspace $ws3 output DP1
+workspace $ws4 output DP2
+workspace $ws5 output DP1
+workspace $ws6 output DP2
+workspace $ws7 output DP1
+workspace $ws8 output DP2
+
+# Move focused workspace between monitors
+bindsym $mod+Ctrl+greater move workspace to output right
+bindsym $mod+Ctrl+less move workspace to output left
 
 # Move focused container to workspace
 bindsym $mod+Ctrl+1 move container to workspace $ws1
@@ -197,14 +206,16 @@ bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 # Open applications on specific workspaces
 assign [class="VSCodium"] $ws1
 assign [class="Brave"] $ws2
-assign [class="zoom"] $ws2
-assign [class="Rocket.Chat"] $ws3
 assign [class="Cliq"] $ws3
 assign [class="notion-app"] $ws3
 assign [class="GitKraken"] $ws4
 assign [class="Mailspring"] $ws5
+assign [class="zoom"] $ws6
+assign [class="Signal"] $ws7
+assign [class="Todoist"] $ws7
 assign [class="discord"] $ws7
-for_window [class="Spotify"] move to workspace $ws6
+assign [class="Steam"] $ws7
+for_window [class="Spotify"] move to workspace $ws8
 
 # Open specific applications in floating mode
 for_window [title="alsamixer"] floating enable border pixel 1
@@ -224,7 +235,6 @@ for_window [class="Nitrogen"] floating enable sticky enable border normal
 for_window [class="Oblogout"] fullscreen enable
 for_window [class="octopi"] floating enable
 for_window [title="About Pale Moon"] floating enable
-for_window [class="Pamac-manager"] floating enable
 for_window [class="Pavucontrol"] floating enable
 for_window [class="qt5ct"] floating enable sticky enable border normal
 for_window [class="Qtconfig-qt4"] floating enable sticky enable border normal
@@ -235,10 +245,14 @@ for_window [class="Timeset-gui"] floating enable border normal
 for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Xfburn"] floating enable
 for_window [class="ksnip"] floating enable
-for_window [title="zoom "] floating enable
+for_window [title="^zoom$"] floating enable
+for_window [title="Cliq Notifier"] floating enable
+
+# Focus on open applications
+# for_window [class="."] focus
 
 # switch to workspace with urgent window automatically
-for_window [urgent=latest] focus
+# for_window [urgent=latest] focus
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -280,10 +294,10 @@ mode "resize" {
         bindsym semicolon resize grow width 5 px or 5 ppt
 
         # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+        bindsym Left resize shrink width 5 px or 5 ppt
+        bindsym Down resize grow height 5 px or 5 ppt
+        bindsym Up resize shrink height 5 px or 5 ppt
+        bindsym Right resize grow width 5 px or 5 ppt
 
         # exit resize mode: Enter or Escape
         bindsym Return mode "default"
@@ -298,15 +312,17 @@ exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id pamac-tray
-exec --no-startup-id signal-tray
+exec --no-startup-id signal-desktop --start-in-tray
 exec --no-startup-id xautolock -time 10 -locker blurlock
 exec --no-startup-id blueman-applet
 exec --no-startup-id autorandr --change --force
 exec --no-startup-id twitch-indicator
+exec --no-startup-id i3-msg 'workspace 1; append_layout /home/aekal/.i3/workspace-1.json' 
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
 exec_always --no-startup-id ~/.config/polybar/launch.sh
-exec_always --no-startup-id nitrogen --restore; sleep 1; picom -b
+exec_always --no-startup-id nitrogen --restore
+exec_always --no-startup-id picom -b --experimental-backends
 
 # Color palette used for the terminal ( ~/.Xresources file )
 # Colors are gathered based on the documentation:
@@ -357,8 +373,8 @@ bindsym $mod+m bar mode toggle
 #############################
 
 # Set inner/outer gaps
-gaps inner 4
-gaps outer -2
+# gaps inner 4
+# gaps outer -2
 
 # Additionally, you can issue commands with the following syntax. This is useful to bind keys to changing the gap size.
 # gaps inner|outer current|all set|plus|minus <px>

@@ -1,2 +1,2 @@
 player=cvlc --file-caching 2000
-default-stream=best
+default-stream=1024p,720p,480p,best

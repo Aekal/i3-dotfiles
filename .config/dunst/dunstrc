@@ -109,7 +109,7 @@
     history_length = 20
     
     # Display indicators for URLs (U) and actions (A).
-    show_indicators = yes
+    show_indicators = no
     
     # The height of a single line.  If the height is smaller than the
     # font height, it will get raised to the font height.
@@ -183,12 +183,12 @@
     # Otherwise the "#" and following would be interpreted as a comment.
     background = "#263238"
     foreground = "#cccccc"
-    timeout = 8
+    timeout = 3
 
 [urgency_normal]
     background = "#263238"
     foreground = "#F9FAF9"
-    timeout = 10
+    timeout = 4
 
 [urgency_critical]
     background = "#D62929"
